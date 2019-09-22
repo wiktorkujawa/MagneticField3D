@@ -3,7 +3,6 @@ using CuArrays
 using CUDAdrv
 using CUDAnative
 let
-  coefficient=0.1
   plane=1
 global function PlotWindow(p_open::Ref{Bool})
                     
@@ -29,7 +28,7 @@ global function PlotWindow(p_open::Ref{Bool})
           CImGui.SameLine()
           CImGui.Image(Ptr{Cvoid}(color_bar_id), ImVec2(bar_width, img_height))
           CImGui.SameLine()
-          @cstatic X=Cfloat[-10.0, 0.20, 10.0] Y=Cfloat[-10, 0.20, 10.0] Z=Cfloat[0.00, 0.10, 0.40] Zplane=Cint(1) Unit=Cint(0) begin
+          @cstatic X=Cfloat[-10.0, 0.20, 10.0] Y=Cfloat[-10, 0.20, 10.0] Z=Cfloat[0.00, 0.10, 0.40] Zplane=Cint(1) begin
               if @isdefined B
                 if @c CImGui.VSliderInt("##v", ImVec2(bar_width,img_height), &Zplane, 1, length(z), @sprintf("%g m",z[Zplane]))
                         Bplane=B[:,:,Zplane]
@@ -42,7 +41,7 @@ global function PlotWindow(p_open::Ref{Bool})
                         global plane=Zplane
                 end
                 Bplane=B[:,:,plane]
-                maxval = maximum(Bplane)*coefficient
+                maxval = maximum(Bplane)
                 xypos=argmax(Bplane)
                 xmax=x[xypos[1]]
                 ymax=y[xypos[2]]
@@ -56,13 +55,6 @@ global function PlotWindow(p_open::Ref{Bool})
               @c CImGui.InputFloat3("Ymin:dY:Ymax", Y, "%g")
               @c CImGui.InputFloat3("Zmin:dZ:Zmax", Z, "%g")
                 
-              CImGui.Separator()
-              CImGui.Text("Choose Unit")
-              CImGui.Separator()
-              @c CImGui.RadioButton("μT", &Unit, 0); CImGui.SameLine()
-              @c CImGui.RadioButton("A/m", &Unit, 1);
-              global coefficient
-              Unit==0 ? coefficient=0.1 : coefficient=1/4pi
 
               if CImGui.Button("Generate plot")&&!isempty(LinesCurrents)
                 x=cu(collect(X[1]:X[2]:X[3]))
