@@ -19,7 +19,7 @@ global function PlotWindow(p_open::Ref{Bool})
             try
               region_x = Cint(div(length(x)*(io.MousePos.x - pos.x),img_width)+1)
               region_y = Cint(length(y)-div(length(y)*(io.MousePos.y - pos.y),img_height))
-              CImGui.Text(@sprintf("[X,Y] = (%g, y = %g)m \n B = %.2f", x[region_x],y[region_y], B[region_x,region_y,plane]))
+              CImGui.Text(@sprintf("[X,Y] = (%g, y = %g)m \n B = %.2f A/m", x[region_x],y[region_y], B[region_x,region_y,plane]))
             catch
             end
             CImGui.EndTooltip()
@@ -45,7 +45,7 @@ global function PlotWindow(p_open::Ref{Bool})
                 xypos=argmax(Bplane)
                 xmax=x[xypos[1]]
                 ymax=y[xypos[2]]
-                CImGui.Text("Magnetic Field on the height of $(z[plane]) m above the ground level \n is equal $(round(maxval, digits=2)) on [X,Y] = [$xmax, $ymax] m")
+                CImGui.Text("Magnetic Field on the height of $(z[plane]) m above the ground level \n is equal $(round(maxval, digits=2)) A/m on [X,Y] = [$xmax, $ymax] m")
                 CImGui.SameLine()
               end
               CImGui.Separator()
