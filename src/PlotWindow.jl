@@ -19,7 +19,7 @@ global function PlotWindow(p_open::Ref{Bool})
             try
               region_x = Cint(div(length(x)*(io.MousePos.x - pos.x),img_width)+1)
               region_y = Cint(length(y)-div(length(y)*(io.MousePos.y - pos.y),img_height))
-              CImGui.Text(@sprintf("[X,Y] = (%g, y = %g)m \n B = %.2f", x[region_x],y[region_y], coefficient*B[region_x,region_y,plane]))
+              CImGui.Text(@sprintf("[X,Y] = (%g, y = %g)m \n B = %.2f", x[region_x],y[region_y], B[region_x,region_y,plane]))
             catch
             end
             CImGui.EndTooltip()
