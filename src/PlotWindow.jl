@@ -73,7 +73,7 @@ global function PlotWindow(p_open::Ref{Bool})
                 Bz=cu(fill(0.0f0,(2,lengthOverall)))
                 B=CuArray{Float32}(undef,lenX,lenY,lenZ)
                 for i=1:segmentlength
-                  numberofsegments=numberofsegments=Int(div(LinesLengths[i],2.5))
+                  numberofsegments=numberofsegments=Int(div(LinesLengths[i],5))
                   if accuracylevel==1  
                     numberofsegments=32
                   elseif accuracylevel==3

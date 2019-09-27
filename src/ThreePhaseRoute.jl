@@ -31,7 +31,7 @@ global function ThreePhaseRoute(p_open::Ref{Bool})
                 bufLength=sqrt(sum((startLineLeft-endLineLeft).^2))
 
                 push!(LinesSegments,[startLineLeft;endLineLeft],[startLineLeft+gapL2;endLineLeft+gapL2],[startLineLeft+gapL3;endLineLeft+gapL3])
-                push!(LinesCurrents,[I*cos(phaseMultiplier[1]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[1]*phaseShift+phaseAngle)/4pi],[I*cos(phaseMultiplier[2]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[2]*phaseShift+phaseAngle)/4pi],[I*cos(phaseMultiplier[3]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[3]*phaseShift+phaseAngle)/4pi])
+                push!(LinesCurrents,[I*cos(phaseMultiplier[1]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[1]*phaseShift+phaseAngle)/2pi],[I*cos(phaseMultiplier[2]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[2]*phaseShift+phaseAngle)/2pi],[I*cos(phaseMultiplier[3]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[3]*phaseShift+phaseAngle)/2pi])
                 push!(LinesLengths,bufLength,bufLength,bufLength)
 
               end
@@ -48,16 +48,22 @@ global function ThreePhaseRoute(p_open::Ref{Bool})
 
               if phaseOrder==0
                 phaseMultiplier=0,-1,1
+                # phaseName=["A","B","C"]
               elseif phaseOrder==1
                 phaseMultiplier=0,1,-1
+                # phaseName=["A","C","B"]
               elseif phaseOrder==2
                 phaseMultiplier=-1,0,1
+                # phaseName=["B","A","C"]
               elseif phaseOrder==3
                 phaseMultiplier=-1,1,0
+                # phaseName=["B","C","A"]
               elseif phaseOrder==4
                 phaseMultiplier=1,0,-1
+                # phaseName=["C","A","B"]
               else
                 phaseMultiplier=1,-1,0
+                # phaseName=["C","B","A"]
               end
 
               CImGui.Separator()
@@ -105,8 +111,10 @@ global function ThreePhaseRoute(p_open::Ref{Bool})
 
 
                 push!(LinesSegments,[startLineLeft;endLineLeft],[startLineCenter;endLineCenter],[startLineRight;endLineRight])
-                push!(LinesCurrents,[I*cos(phaseMultiplier[1]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[1]*phaseShift+phaseAngle)/4pi],[I*cos(phaseMultiplier[2]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[2]*phaseShift+phaseAngle)/4pi],[I*cos(phaseMultiplier[3]*phaseShift+phaseAngle)/4pi,I*sin(phaseMultiplier[3]*phaseShift+phaseAngle)/4pi])
+                push!(LinesCurrents,[I*cos(phaseMultiplier[1]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[1]*phaseShift+phaseAngle)/2pi],[I*cos(phaseMultiplier[2]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[2]*phaseShift+phaseAngle)/2pi],[I*cos(phaseMultiplier[3]*phaseShift+phaseAngle)/2pi,I*sin(phaseMultiplier[3]*phaseShift+phaseAngle)/2pi])
                 push!(LinesLengths,lineLength,lineLength,lineLength)
+                # push!(LinesPhaseOrder,phaseName[1],phaseName[2],phaseName[3])
+                # push!(LinesRouteShift,phaseAngle,phaseAngle,phaseAngle)
 
               
               end

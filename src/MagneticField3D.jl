@@ -51,7 +51,12 @@ CImGui.StyleColorsDark()
 fonts_dir = joinpath(@__DIR__, "..", "fonts")
 fonts = CImGui.GetIO().Fonts
 CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "OpenSans-Regular.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
-
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "Cousine-Regular.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "Karla-Regular.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "ProggyClean.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "ProggyTiny.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "DroidSans.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
+CImGui.AddFontFromFileTTF(fonts, joinpath(fonts_dir, "Roboto-Medium.ttf"), 18, C_NULL, CImGui.GetGlyphRangesCyrillic(fonts))
 
 img_width=400;
 img_height=400;
@@ -65,6 +70,9 @@ color_bar_id = ImGui_ImplOpenGL3_CreateImageTexture(bar_width, img_height, forma
 LinesSegments=Array{Float32,1}[]
 LinesCurrents=Array{Float32,1}[]
 LinesLengths=Float32[]
+# LinesPhaseOrder=String[]
+# LinesRouteShift=Float64[]
+
 
 PolesSegments=Array{Float32,1}[]
 PolesCurrents=Array{Float32,1}[]

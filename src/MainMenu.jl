@@ -1,8 +1,10 @@
 include(joinpath(@__DIR__, "LineManagementWindow.jl"))
-
+include(joinpath(@__DIR__, "AboutAuthor.jl"))
 let
-  showLineManagementWindow=true
-  showPlotWindow=true  
+  showLineManagementWindow = true
+  showPlotWindow = true 
+  showAbout = false 
+  showAuthor = false
   global low=RGB{N0f8}(0.0,0.0,1.0)
   global medium=RGB{N0f8}(0.0,1.0,0.0)
   global high=RGB{N0f8}(1.0,0.0,0.0)
@@ -19,7 +21,21 @@ let
     no_background = false
     no_bring_to_front = false
 
+    show_app_metrics = false
+    show_app_style_editor = false
+    show_app_about = false
+
+
+    
+
 global function MainMenu(p_open::Ref{Bool})
+
+  show_app_metrics && @c CImGui.ShowMetricsWindow(&show_app_metrics)
+  if show_app_style_editor
+      @c CImGui.Begin("Style Editor", &show_app_style_editor)
+      CImGui.ShowStyleEditor()
+      CImGui.End()
+  end
 
   global window_flags = CImGui.ImGuiWindowFlags(0)
     no_titlebar       && (window_flags |= CImGui.ImGuiWindowFlags_NoTitleBar;)
@@ -33,8 +49,11 @@ global function MainMenu(p_open::Ref{Bool})
     no_bring_to_front && (window_flags |= CImGui.ImGuiWindowFlags_NoBringToFrontOnFocus;)
     no_close && (p_open = C_NULL;)
     
+    
   showLineManagementWindow && @c LineManagementWindow(&showLineManagementWindow)
   showPlotWindow && @c PlotWindow(&showPlotWindow)
+  showAbout && @c About(&showAbout)
+  showAuthor && @c Author(&showAuthor)
   
   if CImGui.BeginMainMenuBar()
     if CImGui.BeginMenu("Menu")
@@ -43,6 +62,11 @@ global function MainMenu(p_open::Ref{Bool})
         CImGui.EndMenu()
     end
     if CImGui.BeginMenu("Settings")
+      if CImGui.BeginMenu("Window Settings")
+        @c CImGui.MenuItem("Metrics", C_NULL, &show_app_metrics)
+        @c CImGui.MenuItem("Style Editor", C_NULL, &show_app_style_editor)
+        CImGui.EndMenu()
+      end
       if CImGui.BeginMenu("Accuracy")
         @cstatic number=Cint(1) begin
         @c CImGui.SliderInt("Accuracy level", &number, 1, 3, "Accuracy Level: %d")
@@ -83,8 +107,8 @@ global function MainMenu(p_open::Ref{Bool})
         CImGui.EndMenu()
     end
     if CImGui.BeginMenu("About")
-        # @c CImGui.MenuItem("Readme", C_NULL, &lineManagement)
-        # @c CImGui.MenuItem("About author", C_NULL, &lineManagement)
+        @c CImGui.MenuItem("About", C_NULL, &showAbout)
+        @c CImGui.MenuItem("Author", C_NULL, &showAuthor)
         CImGui.EndMenu()
     end
     CImGui.EndMainMenuBar()
