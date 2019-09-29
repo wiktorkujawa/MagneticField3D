@@ -77,7 +77,7 @@ global function PlotWindow(p_open::Ref{Bool})
                   if accuracylevel==1  
                     numberofsegments=32
                   elseif accuracylevel==3
-                    numberofsegments=Int(div(LinesLengths[i],2.5))
+                    numberofsegments=Int(div(LinesLengths[i],5))
                     if numberofsegments>640
                       numberofsegments=640
                     end

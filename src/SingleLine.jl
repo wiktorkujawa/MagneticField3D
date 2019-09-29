@@ -28,14 +28,14 @@ global function SingleLine(p_open::Ref{Bool})
             CImGui.Button("Add line") && (if inputMethod==0
 
             push!(LinesSegments,[startLine;endLine])
-            push!(LinesCurrents,[I*cos(phaseAngle)/4pi,I*sin(phaseAngle)/4pi])
+            push!(LinesCurrents,[I*cos(phaseAngle)/2pi,I*sin(phaseAngle)/2pi])
             push!(LinesLengths,sqrt(sum((startLine-endLine).^2)))
 
             else
               startLine,endLine=cartesianToPolar2D(startmidLine,lineLength,Angle,beginOrMid,zstart,zend)
 
               push!(LinesSegments,[startLine;endLine])
-              push!(LinesCurrents,[I*cos(phaseAngle)/4pi,I*sin(phaseAngle)/4pi])
+              push!(LinesCurrents,[I*cos(phaseAngle)/2pi,I*sin(phaseAngle)/2pi])
               push!(LinesLengths,sqrt(lineLength*lineLength+(zstart-zend)^2))
             end)
           end

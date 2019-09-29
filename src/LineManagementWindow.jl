@@ -21,9 +21,10 @@ global function LineManagementWindow(p_open::Ref{Bool})
     CImGui.PushStyleColor(CImGui.ImGuiCol_ButtonHovered, CImGui.HSV(0.1, 0.7, 0.7))
     CImGui.PushStyleColor(CImGui.ImGuiCol_ButtonActive, CImGui.HSV(0.1, 0.8, 0.8))
 
-    CImGui.Text(@sprintf("Start:[ %g, %g, %g] m End:[%g , %g, %g] m \nCurrent Value: %g A, PhaseShift: %g degrees ",LinesSegments[i][1],LinesSegments[i][2],LinesSegments[i][3],LinesSegments[i][4],LinesSegments[i][5],LinesSegments[i][6],sqrt(sum(LinesCurrents[i].^2))*4pi,rad2deg(atan(LinesCurrents[i][2],LinesCurrents[i][1])))); CImGui.SameLine()
+    CImGui.Text(@sprintf("Start:[ %.2f, %.2f, %.2f] m\nEnd:[%.2f , %.2f, %.2f] m \nCurrent Value: %g A, PhaseShift: %g degrees ",LinesSegments[i][1],LinesSegments[i][2],LinesSegments[i][3],LinesSegments[i][4],LinesSegments[i][5],LinesSegments[i][6],sqrt(sum(LinesCurrents[i].^2))*2pi,rad2deg(atan(LinesCurrents[i][2],LinesCurrents[i][1])))); CImGui.SameLine()
 
     CImGui.Button("X") && (deleteat!(LinesSegments,i); deleteat!(LinesLengths,i); deleteat!(LinesCurrents,i))
+    CImGui.Separator()
     CImGui.PopStyleColor(3)
     CImGui.PopID()
     i+=1
