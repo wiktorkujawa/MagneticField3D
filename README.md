@@ -14,4 +14,5 @@ The calculations were entirely verified on a large number of tests including:
   - Basic test of long straight single line field values in function of crow-fly distance
   - Test of symmetry in case of two crossing perpendicularly single lines of any current value, but the same phase depend on the current flow direction
   - Test of symmetry in case of two crossing perpendicularly three-phase routes of the same phase shift in depend on current flow direction or phase order
-[<img src="[https://i.vimeocdn.com/video/818182881_640.webp](https://i.vimeocdn.com/video/818182881-5d45b9d613b37dfc93c61dec7fb829c798319d3ff7dfb1fd342d7d46858b3c74-d?mw=960&mh=540)https://i.vimeocdn.com/video/818182881-5d45b9d613b37dfc93c61dec7fb829c798319d3ff7dfb1fd342d7d46858b3c74-d?mw=960&mh=540" width="640">](https://vimeo.com/363038391 "Performed symmetry tests")
+
+[<img src="[https://i.vimeocdn.com/video/818182881_640.webp](https://i.vimeocdn.com/video/818182881-5d45b9d613b37dfc93c61dec7fb829c798319d3ff7dfb1fd342d7d46858b3c74-d?mw=960&mh=540)" width="640">](https://vimeo.com/363038391 "Performed symmetry tests")
